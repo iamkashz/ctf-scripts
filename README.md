@@ -1,5 +1,5 @@
-# ctf-scripts
-Custom scripts developed for CTFs
+# Custom scripts developed for CTFs
+
 | script-name | usage-description |
 | :--- | :--- |
 | auth-bypass-sqli.txt | SQLi via Burp Intruder |
@@ -9,3 +9,11 @@ Custom scripts developed for CTFs
 | oracle-tns-userpass-brute.py | Oracle TNS credential brute-force |
 | page-source-info.sh | Extract key information from page source |
 | vigenere-cipher-key.py | Vigenere Cipher Key Extractor |
+
+
+# HackTheBox scripts
+
+| box-name | box-script-name | description |
+| :--- | :--- | :--- |
+| BankRobber | bankrobber-pin-brute.py | 4 digit PIN bruteforce |
+| Intelligence | intelligence-exiftool-extract.sh | Multifile exiftool data extractor |
