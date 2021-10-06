@@ -17,3 +17,4 @@
 | :--- | :--- | :--- |
 | BankRobber | [bankrobber-pin-brute.py](https://github.com/iamkashz/ctf-scripts/blob/main/HTB/bankrobber-pin-brute.py) | 4 digit PIN bruteforce |
 | Intelligence | [intelligence-exiftool-extract.sh](https://github.com/iamkashz/ctf-scripts/blob/main/HTB/intelligence-exiftool-extract.sh) | Multifile exiftool data extractor |
+| Monitors | [monitors-tomcat-deserialization-rce.sh](https://github.com/iamkashz/ctf-scripts/blob/main/HTB/monitors-tomcat-deserialization-rce.sh) | Apache Tomcat OFBiz XML-RPC Java Deserialization |

